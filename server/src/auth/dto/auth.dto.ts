@@ -1,20 +1,13 @@
-// export class AuthPayloadDto {
-//   username: string;
-
-//   password: string;
-// }
-
 export class AuthPayloadDto {
   username: string;
   ktoken: string;
 }
 
 export class UserProfileDto {
+  id: string;
   nickname: string;
-  thumbnail_image_url: string;
-  profile_image_url: string;
+  profile_image_url: boolean;
   is_default_image: string;
-  is_default_nickname: string;
 }
 
 export class UserProfileResponse {

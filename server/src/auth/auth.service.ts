@@ -1,22 +1,13 @@
 import { HttpException, Injectable } from "@nestjs/common";
-import { AuthPayloadDto, UserProfileResponse } from "./dto/auth.dto";
+import {
+  AuthPayloadDto,
+  UserProfileResponse,
+  UserProfileDto,
+} from "./dto/auth.dto";
 import { JwtService } from "@nestjs/jwt";
 import { HttpService } from "@nestjs/axios";
 import { AxiosError, AxiosRequestConfig } from "axios";
 import { catchError, firstValueFrom } from "rxjs";
-
-const fakeUsers = [
-  {
-    id: 1,
-    username: "anson",
-    password: "password",
-  },
-  {
-    id: 2,
-    username: "jack",
-    password: "password123",
-  },
-];
 
 @Injectable()
 export class AuthService {
@@ -24,14 +15,6 @@ export class AuthService {
     private jwtService: JwtService,
     private readonly httpService: HttpService
   ) {}
-  // validateUser({ username, password }: AuthPayloadDto) {
-  //   const findUser = fakeUsers.find((user) => user.username === username);
-  //   if (!findUser) return null;
-  //   if (password === findUser.password) {
-  //     const { password, ...user } = findUser;
-  //     return this.jwtService.sign(user);
-  //   }
-  // }
 
   async validate({ username, ktoken }: AuthPayloadDto) {
     console.log("validating... ktoken: ", ktoken);
@@ -55,7 +38,13 @@ export class AuthService {
     );
 
     const id = data.id;
-    const user = data.kakao_account.profile;
+    const userprofile = data.kakao_account.profile;
+    const user: UserProfileDto = {
+      id,
+      nickname: userprofile.nickname,
+      profile_image_url: userprofile.profile_image_url,
+      is_default_image: userprofile.is_default_image,
+    };
     if (user.nickname != username) return null;
     else return this.jwtService.sign(user);
   }
