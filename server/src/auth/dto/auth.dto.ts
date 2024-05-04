@@ -1,12 +1,12 @@
+// export class AuthPayloadDto {
+//   username: string;
+
+//   password: string;
+// }
+
 export class AuthPayloadDto {
   username: string;
-
-  password: string;
-}
-
-export class KakaoAuthPayloadDto {
-  username: string;
-  token: string;
+  ktoken: string;
 }
 
 export class UserProfileDto {
@@ -24,10 +24,10 @@ export class UserProfileResponse {
     profile_needs_agreement: boolean;
     profile: {
       nickname: string;
-      thumbnail_image_url:string;
-      profile_image_url:string;
+      thumbnail_image_url: string;
+      profile_image_url: string;
       is_default_image: boolean;
       is_default_nickname: boolean;
-    }
-  }
+    };
+  };
 }
