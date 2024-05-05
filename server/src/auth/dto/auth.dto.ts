@@ -6,8 +6,8 @@ export class AuthPayloadDto {
 export class UserProfileDto {
   id: string;
   nickname: string;
-  profile_image_url: boolean;
-  is_default_image: string;
+  profile_image_url: string;
+  is_default_image: boolean;
 }
 
 export class UserProfileResponse {
