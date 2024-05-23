@@ -3,6 +3,8 @@ import { AuthModule } from "./auth/auth.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UsersModule } from "./users/users.module";
 import { User } from "./users/user.entity";
+import { Friendship } from "./friendship/friendship.entity";
+import { FriendshipModule } from "./friendship/friendship.module";
 
 @Module({
   imports: [
@@ -14,10 +16,11 @@ import { User } from "./users/user.entity";
       username: "root",
       password: "password",
       database: "zzks",
-      entities: [User],
+      entities: [User, Friendship],
       synchronize: true, // to be removed in production becuase of the possibility of data loss
     }),
     UsersModule,
+    FriendshipModule,
   ],
   controllers: [],
   providers: [],
